@@ -16,6 +16,26 @@
 		//导航栏按钮个数
 		var lxNavItemNum = $('.lx-nav-item').length;
 
+
+		//初始化		
+		if (settings.sidebarHeight != 'auto' && typeof settings.sidebarHeight =='number') {
+			$lxNav.css("height",settings.sidebarHeight);
+		}
+		if (settings.wrapWidth != 'auto') {
+			$lxNav.css("width",settings.navWidth);
+		}
+		if (settings.sectionHeight != 'auto' && typeof settings.sectionHeight =='number') {
+			$lxNav_section.css("height",settings.sectionHeight);
+		}
+		console.log($lxNav.width());
+		settings.navItemWidth = (($lxNav.width()-20-lxNavItemNum*20+20)/lxNavItemNum);
+		//console.log(settings.navItemWidth);
+		if (settings.navItemWidth != 'auto' && typeof settings.navItemWidth =='number') {
+			$lxNav_Item.css("width",settings.navItemWidth);
+			console.log(settings.navItemWidth);
+		}
+		$lxNav_wrap.hide();
+		
 		//sectionTopList ==> sectionDataList ==> lxNavList
 
 		//按顺序取每个！section！的scrollTop放入数组sectionTopList
@@ -36,25 +56,6 @@
 		console.log(sectionTopList);
 		console.log(sectionDataList);
 		console.log(lxNavList);
-		
-		//初始化		
-		if (settings.sidebarHeight != 'auto' && typeof settings.sidebarHeight =='number') {
-			$lxNav.css("height",settings.sidebarHeight);
-		}
-		if (settings.wrapWidth != 'auto') {
-			$lxNav.css("width",settings.navWidth);
-		}
-		if (settings.sectionHeight != 'auto' && typeof settings.sectionHeight =='number') {
-			$lxNav_section.css("height",settings.sectionHeight);
-		}
-		console.log($lxNav.width());
-		settings.navItemWidth = (($lxNav.width()-20-lxNavItemNum*20+20)/lxNavItemNum);
-		//console.log(settings.navItemWidth);
-		if (settings.navItemWidth != 'auto' && typeof settings.navItemWidth =='number') {
-			$lxNav_Item.css("width",settings.navItemWidth);
-			console.log(settings.navItemWidth);
-		}
-		$lxNav_wrap.hide();
 		
 		$lxNav.css({"background-color": settings.navBgColor});
 		$lxNav.css({
@@ -150,6 +151,9 @@
 			var targetTop=getTargetSectionByNav(data);
 			console.log(targetTop);
 			$html_body.animate({scrollTop: targetTop}, 800);
+			if (targetTop == 0 ) {
+				$lxNav_wrap.fadeOut('fast');
+			}
 			return false;
 		});
 		//滑轮后导航栏消失
@@ -211,7 +215,7 @@
 
 	$.fn.lxnav.default={
 		sidebarHeight:'auto',	//导航栏高度
-		sectionHeight: 500,	//每个section固定高度
+		sectionHeight: 600,	//每个section固定高度
 		navItemWidth:'auto',  //导航栏每个按钮的宽度
 		navWidth:'auto',    //导航栏宽度
 		navBgColor: '#fff',    //导航栏背景颜色

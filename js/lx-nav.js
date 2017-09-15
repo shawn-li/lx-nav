@@ -63,14 +63,11 @@
 			"-moz-opacity":settings.navOpacity
 		});
 
-		//取所有lx-nav-section
-		var lx_sections=$('div.lx-nav-section');
-		
 
 		//根据点击导航栏得到对应的section
 		var getTargetSectionByNav=function(data){
 			var targetTop;
-			lx_sections.each(function(){
+			$lxNav_section.each(function(){
 				if ($(this).attr('data-lx-nav') == data) {					
 					//需要定位top高度值
 					targetTop=$(this).offset().top;
